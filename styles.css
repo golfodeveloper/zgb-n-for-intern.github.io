@@ -151,23 +151,35 @@ nav a.active {
 /* === 4. Стили для страницы Обучения (lecture.html) === */
 
 .training-container {
-    display: flex; /* Ключевое свойство для разделения сайдбара и контента */
-    max-width: 1200px;
-    margin: 40px auto;
+    display: flex; /* Разделяет сайдбар и контент */
+    width: 1200px; /* <--- ФИКСИРОВАННАЯ ШИРИНА для предотвращения смещения */
+    max-width: 1200px; 
+    margin: 40px auto; /* Центрирует блок */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     background: #ffffff; 
     flex-grow: 1;
+    height: calc(100vh - 80px);
 }
 
-/* SIDEBAR - ТЕМНЫЙ СТИЛЬ */
 .sidebar {
-    width: 300px; /* Фиксированная небольшая ширина */
+    width: 300px; /* Фиксированная ширина сайдбара */
     background: var(--bg-color-sidebar); 
-    padding: 20px 0;
-    flex-shrink: 0; /* Не дает ему сжиматься */
-    border-right: 1px solid var(--border-sidebar); /* Четкая граница */
+    padding: 20px 0; 
+    flex-shrink: 0; 
+    border-right: 1px solid var(--border-sidebar); 
+    overflow-y: auto;
+}
+
+.content {
+     flex: 1; 
+     padding: 40px;
+     background: #ffffff; 
+     overflow-y: auto;
+     overflow-x: hidden;
+    /* ФИКС СМЕЩЕНИЯ (ПРЫЖКОВ) */
+    scrollbar-gutter: stable; 
 }
 
 /* Аккордеон-группа (обертка) */
@@ -309,26 +321,35 @@ footer a {
 
 /* === 6. Responsive (Адаптивность) === */
 @media (max-width: 900px) {
-     .training-container {
-     flex-direction: column; /* Сайдбар переходит наверх */
-     margin: 0; /* Убираем отступы */
-     box-shadow: none;
-     display: flex;
-    height: 100vh; /* Занимает весь экран */
-    border-radius: 0;
-    /* УДАЛИТЬ ОТСЮДА: min-width: 1200px; max-width: 1200px; width: 1200px; */
+.training-container {
+    display: flex; /* Разделяет сайдбар и контент */
+    width: 1200px; /* <--- ФИКСИРОВАННАЯ ШИРИНА для предотвращения смещения */
+    max-width: 1200px; 
+    margin: 40px auto; /* Центрирует блок */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background: #ffffff; 
+    flex-grow: 1;
+    height: calc(100vh - 80px);
 }
 
-    .sidebar {
-     width: 100%; /* Сайдбар на всю ширину */
-     height: auto; 
-     max-height: 50vh; 
-     border-right: none;
-    border-bottom: 1px solid var(--border-sidebar);
-    }
-    .content {
-    flex: 1; 
-    padding: 20px;
-    /* УДАЛИТЬ ОТСЮДА: scrollbar-gutter: stable; (оно в глобальном блоке) */
-    }
+.sidebar {
+    width: 300px; /* Фиксированная ширина сайдбара */
+    background: var(--bg-color-sidebar); 
+    padding: 20px 0; 
+    flex-shrink: 0; 
+    border-right: 1px solid var(--border-sidebar); 
+    overflow-y: auto;
+}
+
+.content {
+     flex: 1; 
+     padding: 40px;
+     background: #ffffff; 
+     overflow-y: auto;
+     overflow-x: hidden;
+    /* ФИКС СМЕЩЕНИЯ (ПРЫЖКОВ) */
+    scrollbar-gutter: stable; 
+}
 }
