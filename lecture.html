@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обучение - Отделение Интернатуры</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Вспомогательные стили, которых не было в CSS */
+        .material-symbols-rounded {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        
+        /* Стили для показа/скрытия контента */
+        .content-section {
+            display: none; /* Все секции по умолчанию скрыты */
+        }
+        .content-section.active {
+            display: block; /* Активная секция показывается */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="training-container">
+
+        <aside class="sidebar">
+            
+            <div class="accordion-group">
+                <button class="accordion-header" aria-expanded="true">
+                    <span>Обучение МС</span>
+                    <span class="material-symbols-rounded icon-toggle">expand_more</span>
+                </button>
+                <div class="accordion-content">
+                
+                    <button class="menu-button active" data-target="content-welcome">
+                        <span class="material-symbols-rounded">flag</span>
+                        Вступление
+                    </button>
+
+                    <div class="sub-group">
+                        <div class="sub-header">Шаг 1: Подготовка</div>
+                        <div class="sub-content">
+                            <button class="menu-button" data-target="content-binds">
+                                <span class="material-symbols-rounded">keyboard</span>
+                                Настройка биндов
+                            </button>
+                            <button class="menu-button" data-target="content-radio">
+                                <span class="material-symbols-rounded">radio</span>
+                                Использование рации
+                            </button>
+                            <button class="menu-button" data-target="content-reports">
+                                <span class="material-symbols-rounded">campaign</span>
+                                Доклады в рацию
+                            </button>
+                            <button class="menu-button" data-target="content-commands">
+                                <span class="material-symbols-rounded">terminal</span>
+                                Основные команды
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-group">
+                        <div class="sub-header">Шаг 2: Устав и правила</div>
+                        <div class="sub-content">
+                            <button class="menu-button" data-target="content-schedule">
+                                <span class="material-symbols-rounded">schedule</span>
+                                График работы
+                            </button>
+                            <button class="menu-button" data-target="content-floors">
+                                <span class="material-symbols-rounded">business</span>
+                                Распределение этажей
+                            </button>
+                            <button class="menu-button" data-target="content-afk">
+                                <span class="material-symbols-rounded">person_off</span>
+                                Журнал Активности (ЖА)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sub-group">
+                        <div class="sub-header">Шаг 3: Экзамен (Теория)</div>
+                        <div class="sub-content">
+                            <button class="menu-button" data-target="content-abbr">
+                                <span class="material-symbols-rounded">segment</span>
+                                Аббревиатуры
+                            </button>
+                            <button class="menu-button" data-target="content-drugs">
+                                <span class="material-symbols-rounded">pill</span>
+                                Список препаратов
+                            </button>
+                            <button class="menu-button" data-target="content-deps">
+                                <span class="material-symbols-rounded">groups</span>
+                                Отделения ЦГБ
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="menu-button" data-target="content-oath">
+                        <span class="material-symbols-rounded">school</span>
+                        Шаг 4: Клятва врача
+                    </button>
+                    
+                    <button class="menu-button" data-target="content-next">
+                        <span class="material-symbols-rounded">double_arrow</span>
+                        Что дальше?
+                    </button>
+
+                </div>
+            </div>
+            
+            <div class="accordion-group">
+                <button class="accordion-header" aria-expanded="false">
+                    <span>Обучение ОПРС</span>
+                    <span class="material-symbols-rounded icon-toggle">expand_more</span>
+                </button>
+                <div class="accordion-content">
+                    <button class="menu-button" disabled>
+                        <span class="material-symbols-rounded">construction</span>
+                        В разработке
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
+        <main class="content">
+
+            <section class="content-section active" id="content-welcome">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ОТДЕЛЕНИЕ ИНТЕРНАТУРЫ / ВСТУПЛЕНИЕ</p>
+                <h1>Добро пожаловать в ЦГБ города Невский!</h1>
+                <p>С этого момента Вы являетесь сотрудником Отделения Интернатуры.</p>
+                <p>На выход из Отделения Интернатуры и повышения до лаборанта вам дается <strong>14 дней</strong>.</p>
+                
+                <h2>Твоя первая и главная задача: Получить допуск к лечению</h2>
+                <p>До получения допуска к лечению вам нельзя абсолютно ничего. Лечить пациентов сможете только тогда, кода получите допуск к лечению.</p>
+                <p>Чтобы получить допуск, вам нужно сдать:</p>
+                <ol>
+                    <li><strong>Устную речь</strong> (проверка биндов).</li>
+                    <li><strong>Успешно сдать Первичный Медицинский Экзамен</strong> (теория).</li>
+                    <li><strong>Клятву врача</strong>.</li>
+                </ol>
+                <p>Ниже мы подробно разберем каждый шаг твоей подготовки.</p>
+            </section>
+            
+            <section class="content-section" id="content-binds">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
+                <h1>1.1. Настройка биндов</h1>
+                <p>"Устная речь" - это РП название биндов. Тебе нужно будет по порядку прожать клавиши, на которых закреплены отыгровки. <strong>Понятие "бинд" в РП чате мы НЕ используем.</strong></p>
+                <h3>Обязательная настройка</h3>
+                <p>Бинды — это твой главный рабочий инструмент. Они экономят время и обеспечивают качественную РП-отыгровку.</p>
+                <ul>
+                    <li><strong>Официальная тема с биндами:</strong> <a href="https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/" target="_blank">https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/</a></li>
+                    <li>Обязательно установите бинды, меняя на свои данные в нужных местах.</li>
+                </ul>
+                
+                <h3 style="background-color: #ffe3dc; padding: 10px; border-radius: 8px;">[ЗДЕСЬ БУДЕТ ТВОЙ МАНУАЛ ПО НАСТРОЙКЕ БИНДОВ]</h3>
+                <p><em>(Как ты и просил, оставил место для твоего гайда по установке)</em></p>
+            </section>
+            
+            <section class="content-section" id="content-radio">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
+                <h1>1.2. Использование рации</h1>
+                <p>В шкафу (на 1 этаже) лежит рация, настроенная на нужную волну. Возьмите ее, а так же возьмите медицинскую сумку. Рация предназначена для того, чтобы делать необходимые доклады.</p>
+                
+                <h3>Команды рации</h3>
+                <ul>
+                    <li><strong>Команда РП рации:</strong> <code>/r</code></li>
+                    <li><strong>Команда нонРП рации:</strong> <code>/rb</code></li>
+                    <li><strong>Команда РП рации (между больницами):</strong> <code>/ro</code></li>
+                    <li><strong>Команда нонРП рации (между больницами):</strong> <code>/rob</code></li>
+                </ul>
+
+                <h3>Правила использования</h3>
+                <ol>
+                    <li><strong>Отыгровка:</strong> Перед тем, как сказать что-то в рацию, нужно <strong>обязательно отыграть</strong> то, что Вы её достали, а после доклада - то, что убрали.</li>
+                    <li><strong>Что говорить в /r:</strong> Сейчас РП рацию можно использовать <strong>только для докладов</strong>: о заступлении на смену, сдаче смены, принятии вызова, выезде в патруль и иное.</li>
+                    <li><strong>Что говорить в /rb:</strong> Вся остальная информация (вопросы, общение) — <strong>только в /rb</strong>.</li>
+                    <li><strong>Для интернов:</strong> Сейчас рация Вам доступна <strong>только для докладов о заступлении на смену и об её сдаче</strong>.</li>
+                </ol>
+            </section>
+            
+            <section class="content-section" id="content-reports">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
+                <h1>1.3. Доклады в рацию (Раздел 6)</h1>
+                <p>Доклад в рацию состоит из <strong>ТЭГА</strong> и сути доклада. ТЭГ устроен следующим образом: <code>отделение-инициалы</code>.</p>
+                <p><em>Пример: Вы состоите в отделении интернатуры и вас зовут Серафим Левандовский. Ваш ТЭГ будет выглядеть так: <strong>ОИ-СЛ</strong>.</em></p>
+                
+                <h3>Шаблоны докладов</h3>
+                <details>
+                  <summary><strong>Мужские доклады (Нажмите, чтобы развернуть)</strong></summary>
+                  <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                    ... (Тут будет текст из "Мужские доклады" Раздела 6) ...
+                  </p>
+                </details>
+                <br>
+                <details>
+                  <summary><strong>Женские доклады (Нажмите, чтобы развернуть)</strong></summary>
+                  <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                    ... (Тут будет текст из "Женские доклады" Раздела 6) ...
+                  </p>
+                </details>
+            </section>
+
+            <section class="content-section" id="content-commands">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
+                <h1>1.4. Основные команды (Раздел 8)</h1>
+                <p>Это список основных команд, которые понадобятся тебе на смене.</p>
+                <ul>
+                    <li><code>/r [Text]</code> - RP рация сотрудников ЦГБ.</li>
+                    <li><code>/rb [Text]</code> - NonRP чат сотрудников ЦГБ.</li>
+                    <li><code>/ro [Text]</code> - Общая RP рация сотрудников МЗ.</li>
+                    <li><code>/rob [Text]</code> - Общий NonRP чат сотрудников МЗ.</li>
+                    <li><code>/find</code> - Список игроков во фракции онлайн.</li>
+                    <li><code>/helpmed [ID]</code> - Предложить лечение пациенту (Работает в больнице).</li>
+                    <li><code>/heal [ID]</code> - Предложить лечение человеку (Работает в карете скорой помощи).</li>
+                    <li><code>/paytime</code> - Узнать оставшееся время до получения зарплаты.</li>
+                    <li><code>/ud [ID]</code> - Показать удостоверение.</li>
+                    <li><code>/to [ID]</code> - Принять поступивший вызов (со 2 ранга).</li>
+                    <li><code>/cancel</code> - Отказаться от принятого вызова (со 2 ранга).</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="content-schedule">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 2: УСТАВ И ПРАВИЛА</p>
+                <h1>2.1. График работы (Раздел 2)</h1>
+                <ul>
+                    <li><strong>С понедельника по пятницу:</strong> с 10:00 до 19:00.</li>
+                    <li><strong>В субботу:</strong> с 11:00 до 18:00.</li>
+                    <li><strong>Перерыв ежедневно:</strong> с 14:00 до 15:00.</li>
+                    <li><strong>Воскресенье:</strong> выходной для сотрудников без наказаний.</li>
+                </ul>
+                <p><strong>ВАЖНО:</strong></p>
+                <ul>
+                    <li>Время указано <strong>московское</strong>!</li>
+                    <li><strong>Сотрудники с наказаниями</strong> работают в воскресенье по субботнему графику. Отсутствие таковых на рабочем месте расценивается как <strong>прогул смены</strong>.</li>
+                    <li>Отсутствие сотрудника на рабочем месте без уважительной причины (перерыва, отпуска или отгула) в рабочее время автоматически расценивается как <strong>прогул</strong> смены.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="content-floors">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 2: УСТАВ И ПРАВИЛА</p>
+                <h1>2.2. Распределение этажей (Раздел 4)</h1>
+                <p>В ЦГБ г. Невский есть распределение по этажам. Всего 5 этажей, и у каждого из них свое назначение.</p>
+                <ul>
+                    <li><strong>1 этаж</strong> – лечение пациентов (только выписывание препарата, без обследований).</li>
+                    <li><strong>2 этаж</strong> – проведение процедур и операций.</li>
+                    <li><strong>3 этаж</strong> – выдача мед.карт, проведение мед. комиссий.</li>
+                    <li><strong>4 этаж</strong> – оказание услуг организаций при отделениях (Травматолого-ортопедический центр, НИИ Эпидемиологии, Стоматологическая поликлиника «Дентист»).</li>
+                    <li><strong>5 этаж</strong> – служебный, отдых сотрудников, проведение собеседований.</li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="content-afk">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 2: УСТАВ И ПРАВИЛА</p>
+                <h1>2.3. Журнал Активности (ЖА) и система AFK (Раздел 9)</h1>
+                <p>В больнице существует <strong>Журнал Активности (ЖА)</strong>.</p>
+                <ul>
+                    <li>При заступлении на смену Вы обязательно должны нажать кнопку <strong>!онлайн</strong>.</li>
+                    <li>Когда выходите из игры полностью — <strong>!вышел</strong>.</li>
+                    <li>Когда покидаете смену (AFK) — <strong>!афк</strong>.</li>
+                </ul>
+                <p>За несоответствие ЖА Вас могут наказать, поэтому внимательно следите за тем, чтобы вы качественно вели его.</p>
+                
+                <h3>Правила AFK</h3>
+                <ul>
+                    <li>Вставать в АФК разрешено где угодно в пределах больницы (Исключение: крыша больницы).</li>
+                    <li>Длительность АФK — <strong>не более 5-ти минут!</strong></li>
+                    <li>Вставать в АФК при онлайне 600 человек и больше — <strong>запрещено!</strong></li>
+                </ul>
+            </section>
+
+            <section class="content-section" id="content-abbr">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 3: ЭКЗАМЕН (ТЕОРИЯ)</p>
+                <h1>3.1. Аббревиатуры (Раздел 1)</h1>
+                <details open>
+                  <summary><strong>Список всех аббревиатур (Нажмите, чтобы развернуть)</strong></summary>
+                  <ul style="margin-top: 15px;">
+                    <li><b>МЗ</b> - Министерство Здравоохранения</li>
+                    <li><b>ЦГБ-Н</b> - Центральная Городская Больница города Невский</li>
+                    <li><b>ОПСГО</b> - Общие Правила Сотрудников Государственных Организаций</li>
+                    <li><b>ПРСГО</b> - Правила Руководящего Состава Государственных Организаций</li>
+                    <li><b>ОУМЗ</b> - Общий Устав Министерства Здравоохранения</li>
+                    <li><b>ВУ</b> - Внутренний Устав</li>
+                    <li><b>ГСзФ</b> - Главный Следящий за Фракциями</li>
+                    <li><b>ЗГСзФ</b> - Заместитель Главного Следящего за Фракциями</li>
+                    <li><b>ГС</b> - Главный Следящий</li>
+                    <li><b>ПГС</b> - Помощник Главного Следящего</li>
+                    <li><b>ГВ</b> - Главный Врач</li>
+                    <li><b>ПЗГВ</b> - Первый Заместитель Главного Врача</li>
+                    <li><b>ЗГВ</b> - Заместитель Главного Врача</li>
+                    <li><b>ЗО</b> - Заведующий Отделением</li>
+                    <li><b>ЗЗО</b> - Заместитель Заведующего Отделени</li>
+                    <li><b>ВрИО</b> - Временно Исполняющий Обязанности</li>
+                    <li><b>ИО</b> - Исполняющий Обязанности</li>
+                    <li><b>РС</b> - Руководящий Состав</li>
+                    <li><b>МС</b> - Младший Состав</li>
+                    <li><b>ОДС</b> - Отделение Дневного Стационара</li>
+                    <li><b>ОИК</b> - Отделение Инфекционного Контроля</li>
+                    <li><b>СОП</b> - Стоматологическое Отделение Поликлиники</li>
+                    <li><b>ОПРС</b> - Отделение Подготовки Руководящего Состава</li>
+                    <li><b>ОИ</b> - Отделение Интернатуры</li>
+                    <li><b>АСМП</b> - Автомобиль Скорой Медицинской Помощи</li>
+                    <li><b>ВСМП</b> - Вертолёт Скорой Медицинской Помощи</li>
+                    <li><b>РАСМП</b> - Реанимационный Автомобиль Скорой Медицинской Помощи</li>
+                    <li><b>ЖА</b> - Журнал Активности</li>
+                    <li><b>МП</b> - Мероприятие</li>
+                    <li><b>ПСЖ</b> - По Собственному Желанию</li>
+                    <li><b>УП</b> - Уважительная Причина</li>
+                    <li><b>ТКМ</b> - Теоретический Квалификационный Модуль</li>
+                    <li><b>КМН</b> - Кандидат Медицинских Наук</li>
+                    <li><b>ДМН</b> - Доктор Медицинских Наук</li>
+                  </ul>
+                </details>
+            </section>
+            
+            <section class="content-section" id="content-drugs">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 3: ЭКЗАМЕН (ТЕОРИЯ)</p>
+                <h1>3.2. Список препаратов (Раздел 3)</h1>
+                <details open>
+                  <summary><strong>Список препаратов по симптомам (Нажмите, чтобы развернуть)</strong></summary>
+                  <ul style="margin-top: 15px;">
+                    <li><b>Головная боль:</b> (спрашиваем, как сильно болит голова)
+                      <ul>
+                        <li><b>Обычная</b> - Пенталгин, Спазган, Некст, Дексалгин;</li>
+                        <li><b>Сильная (мигрень)</b> - Амигрен, Сумамигрен;</li>
+                      </ul>
+                    </li>
+                    <li><b>Судороги, нервный тик</b> - Магнелис, Аспаркам;</li>
+                    <li><b>Боль в животе:</b> (спрашиваем вид боли)
+                      <ul>
+                        <li><b>Тошнота</b> - Церукал, Драмина;</li>
+                        <li><b>Спазмы</b> - Но-шпа, Дротаверин;</li>
+                        <li><b>Диарея</b> - Лоперамид, Лопедиум;</li>
+                        <li><b>Отравление</b> - Энтеродез, Энтеросгель, Смекта;</li>
+                        <li><b>Изжога:</b> Ренни, Маалокс, Мотилиум.</li>
+                      </ul>
+                    </li>
+                    <li><b>Боль в печени:</b> Карсил Форте, Гепабене.</li>
+                    <li><b>Боль в сердце:</b> Кардиомагнил, Ацетилсалициловая кислота, Клопидогрел, Варфавин, Ксарелто, Периндоприл,Лозартан, Карведилол, Триметазидин. (после принятия таблетки необходимо провести ЭКГ)</li>
+                    <li><b>Простуда и жар:</b> Терафлю, Колдрекс, Антигриппин.</li>
+                    <li><b>Кашель:</b> Лазолван, Стоптуссин, Пертуссин.</li>
+                    <li><b>Боль в горле:</b>
+                      <ul>
+                        <li><b>Спреи</b> - Гексорал, Стопангин, Тантум-Верде;</li>
+                        <li><b>Таблетки для рассасывания</b> - Стрепсилс, Граммидин;</li>
+                      </ul>
+                    </li>
+                    <li><b>Насморк:</b> Тизин, Снуп, Отривин.</li>
+                    <li><b>Боль в спине, ногах и суставах:</b> Фастум-гель, Кетонал, Долгит, Капсикам, Финалгон.</li>
+                    <li><b>Мази от ушибов и ссадин:</b> Долобене, Лиотон, Троксевазин, Фенистил, Кетонал.</li>
+                    <li><b>Повышенное давление:</b> Андипал.</li>
+                    <li><b>Пониженное давление:</b> Норадреналин, Кофеин (таблетки под язык), Кордиамин.</li>
+                    <li><b>Аллергия:</b> Зиртек, Эриус, Зодак, Тавегил.</li>
+                    <li><b>Ожоги:</b> Пантенол.</li>
+                    <li><b>Глазная боль:</b> Визин, Альбуцид.</li>
+                    <li><b>Боль в ушах:</b> Отипакс.</li>
+                    <li><b>Боль в почках:</b> Уролесан, Пролит.</li>
+                    <li><b>Боль в мочевом пузыре:</b> Цистон, Фитолизин.</li>
+                    <li><b>Сотрясение:</b> Диакарб и Пирацетам.</li>
+                    <li><b>Витамины:</b> Компливит, Витрум.</li>
+                    <li><b>При сахарном диабете:</b> Виктоза, Диабетон, Астрозон.</li>
+                  </ul>
+                </details>
+            </section>
+
+            <section class="content-section" id="content-deps">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 3: ЭКЗАМЕН (ТЕОРИЯ)</p>
+                <h1>3.3. Отделения ЦГБ (Раздел 5)</h1>
+                <p>Ты должен понимать структуру нашей больницы.</p>
+                  
+                  <ul style="margin-top: 15px;">
+                    <li><b>Отделение Интернатуры (ОИ)</b> - это одно из отделений ЦГБ города Невский, сотрудники которого обучаются работе в нашей больнице.</li>
+                    <li><b>Отделение Дневного Стационара (ОДС)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе Травматолого-ортопедического центра, проведением проверок аптек и травматологических рейдов для населения и сотрудников государственных организаций.</li>
+                    <li><b>Отделение Инфекционного Контроля (ОИК)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе НИИ Эпидемиологии, проведением санитарных проверок и инфекционных рейдов для населения и сотрудников государственных организаций.</li>
+                    <li><b>Стоматологическое Отделение Поликлиники (СОП)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе Стоматологической поликлиники "Дентиста" и проведением стоматологических рейдов для населения и сотрудников государственных организаций.</li>
+                    <li><b>Отделение Подготовки Руководящего Состава (ОПРС)</b> - это одно из отделений ЦГБ города Невский, сотрудники которого проходят курсы повышения квалификации для дальнейшей работы в Руководящем составе больницы.</li>
+                  </ul>
+
+            </section>
+
+<section class="content-section" id="content-oath">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 4: КЛЯТВА</p>
+    <h1>Клятва врача</h1>
+    
+    <p>Это текст, который должен быть выучен наизусть и сдан для получения допуска к лечению.</p>
+    
+    <div style="background-color: #f7f7f7; padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+        <p><strong>Получая высокое звание врача и приступая к профессиональной деятельности, я торжественно...</strong></p>
+        <p>...клянусь честно исполнять свой врачебный долг, быть всегда готовым оказать медицинскую...</p>
+        <p>...помощь, хранить врачебную тайну, внимательно и заботливо относиться к пациенту,..</p>
+        <p>...действовать исключительно в его интересах независимо от пола, расы, национальности,..</p>
+        <p>...языка, происхождения, а также других обстоятельств.</p>
+        <p>Доброжелательно относиться к коллегам, обращаться к ним за помощью и советом...</p>
+        <p>...и самому никогда не отказывать коллегам в помощи и совете. </p>
+        <p>Беречь и развивать благородные традиции медицины</p>
+    </div>
+</section>
+
+            <section class="content-section" id="content-next">
+                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ЗАКЛЮЧЕНИЕ</p>
+                <h1>Что дальше?</h1>
+                <p>После того как ты получишь допуск, тебе откроются новые обязанности. Можешь ознакомиться с ними заранее.</p>
+                <ul>
+                    <li>Пешее патрулирование (с 3 ранга) (Раздел 10)</li>
+                    <li>Выезды на ПРМО (Предрейсовый Мед. Осмотр) (Раздел 11)</li>
+                    <li>Работа на Постах АСМП (Раздел 7)</li>
+                    <li>Использование Автопарка (Раздел 12)</li>
+                    <li>Смена формы в соответствии с должностью (Раздел 13)</li>
+                </ul>
+                <p><em>(Ты можешь сделать эти пункты ссылками на новые разделы, когда добавишь их)</em></p>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- 1. Логика Аккордеона ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                    const icon = header.querySelector('.icon-toggle');
+
+                    // Открываем/Закрываем текущий
+                    if (!isExpanded) {
+                        header.setAttribute('aria-expanded', 'true');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        if(icon) icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        header.setAttribute('aria-expanded', 'false');
+                        content.style.maxHeight = null;
+                        if(icon) icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+
+            // Авто-открытие первого аккордеона
+            const firstAccordion = document.querySelector('.accordion-header');
+            if(firstAccordion) {
+                firstAccordion.click();
+            }
+
+            // --- 2. Логика переключения контента ---
+            const menuButtons = document.querySelectorAll('.menu-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            const contentArea = document.querySelector('.content'); // Контейнер контента
+
+            menuButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.disabled) return;
+
+                    const targetId = button.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+
+                    // 1. Убираем .active со всех кнопок
+                    menuButtons.forEach(btn => btn.classList.remove('active'));
+                    // 2. Добавляем .active нажатой кнопке
+                    button.classList.add('active');
+
+                    // 3. Скрываем все секции контента
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    // 4. Показываем нужную секцию
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+
+                    // 5. Скроллим контент наверх (полезно на мобильных)
+                    if (contentArea) {
+                        contentArea.scrollTop = 0;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

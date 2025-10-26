@@ -1,0 +1,334 @@
+/* --- Глобальные переменные и сброс --- */
+:root {
+    --primary-color: #ee4018;       /* Основной оранжевый акцент */
+    --text-color-light: #222;       /* Темный текст для светлой темы */
+    --text-color-dark: #f0f0f0;     /* Светлый текст для темной темы */
+    --bg-color: #fff;          /* Основной белый фон */
+    --light-bg: #f5f7fa;        /* Светлый фон для контента/футера */
+    --hover-bg: #f0f0f0;        /* Фон при наведении на светлых элементах */
+    
+    /* --- ПЕРЕМЕННЫЕ ДЛЯ ТЕМНОГО САЙДБАРА --- */
+    --bg-color-sidebar: #282828;    /* ТЕМНЫЙ ФОН */
+    --hover-bg-sidebar: #3d3d3d;    /* Фон при наведении в сайдбаре */
+    --border-sidebar: #3d3d3d;      /* Границы в сайдбаре */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background: var(--bg-color);
+    color: var(--text-color-light); 
+    min-height: 100vh;
+    display: flex; 
+    flex-direction: column;
+}
+
+/* === 1. HEADER (Навигация) === */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* === 2. HERO (Главная страница) === */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--bg-color), #ffe3dc); 
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 700px;
+    line-height: 1.6;
+}
+
+/* Кнопка */
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(238, 64, 24, 0.3);
+}
+
+.btn:hover {
+    background-color: #d73713;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(238, 64, 24, 0.4);
+}
+
+/* === 3. CARDS (Главная страница) === */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 260px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid #f0f0f0; 
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card span.material-symbols-rounded {
+    font-size: 40px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    background: #ffe3dc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* === 4. Стили для страницы Обучения (lecture.html) === */
+
+.training-container {
+    display: flex; /* Ключевое свойство для разделения сайдбара и контента */
+    max-width: 1200px;
+    margin: 40px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background: #ffffff; 
+    flex-grow: 1;
+}
+
+/* SIDEBAR - ТЕМНЫЙ СТИЛЬ */
+.sidebar {
+    width: 300px; /* Фиксированная небольшая ширина */
+    background: var(--bg-color-sidebar); 
+    padding: 20px 0;
+    flex-shrink: 0; /* Не дает ему сжиматься */
+    border-right: 1px solid var(--border-sidebar); /* Четкая граница */
+}
+
+/* Аккордеон-группа (обертка) */
+.accordion-group {
+    border-bottom: 1px solid var(--border-sidebar);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+/* Аккордеон-заголовок (Для МС, Для ОПРС) */
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-color-dark); /* Светлый текст */
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: 700; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+    background-color: var(--hover-bg-sidebar);
+}
+
+/* Содержимое аккордеона (скрытие/раскрытие) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    padding-bottom: 5px;
+}
+
+/* Кнопки-разделы внутри Аккордеона (Вступление, ПРМО) */
+.accordion-content button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 8px 20px 8px 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: var(--text-color-dark);
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.accordion-content button:hover {
+    background-color: var(--hover-bg-sidebar);
+}
+
+.accordion-content button span.material-symbols-rounded {
+    font-size: 20px;
+    color: #aaa; 
+}
+
+/* Активный пункт меню - ОРАНЖЕВЫЙ АКЦЕНТ */
+.accordion-content button.active {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.accordion-content button.active span.material-symbols-rounded {
+    color: white;
+}
+
+/* --- Стили для Вложенной Группы (Sub-Group: Первые шаги) --- */
+
+.sub-group .sub-header {
+    /* Стиль для заголовка подгруппы */
+    font-weight: 700;
+    color: #aaa;
+    padding: 10px 20px 10px 25px;
+    font-size: 0.95rem;
+}
+
+.sub-group .sub-content button {
+    /* Сдвиг для ссылок внутри подгруппы (ПМЭ, Клятва врача) */
+    padding: 8px 20px 8px 45px; /* Увеличиваем левый паддинг для вложенности */
+    font-weight: 500;
+}
+
+/* CONTENT (Основная область) - СВЕТЛАЯ */
+.content {
+    flex: 1; /* Занимает всю оставшуюся ширину */
+    padding: 40px;
+    background: #ffffff; 
+}
+
+.content h1, .content h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.content h3 {
+    margin-top: 30px;
+    color: #444;
+}
+
+.content p, .content ul, .content ol {
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.content ul, .content ol {
+    margin-left: 20px;
+}
+
+.content a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* === 5. Footer === */
+footer {
+    background: #f9f9f9;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid #eee;
+    margin-top: auto; 
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* === 6. Responsive (Адаптивность) === */
+@media (max-width: 900px) {
+     .training-container {
+     flex-direction: column; /* Сайдбар переходит наверх */
+     margin: 0; /* Убираем отступы */
+     box-shadow: none;
+     display: flex;
+    height: 100vh; /* Занимает весь экран */
+    border-radius: 0;
+    /* УДАЛИТЬ ОТСЮДА: min-width: 1200px; max-width: 1200px; width: 1200px; */
+}
+
+    .sidebar {
+     width: 100%; /* Сайдбар на всю ширину */
+     height: auto; 
+     max-height: 50vh; 
+     border-right: none;
+    border-bottom: 1px solid var(--border-sidebar);
+    }
+    .content {
+    flex: 1; 
+    padding: 20px;
+    /* УДАЛИТЬ ОТСЮДА: scrollbar-gutter: stable; (оно в глобальном блоке) */
+    }
+}
