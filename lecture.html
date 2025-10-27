@@ -6,25 +6,211 @@
     <title>Обучение - Отделение Интернатуры</title>
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://mz.kaze.red/images/logo.svg" type="image/svg+xml">
     
     <style>
+        :root {
+            --primary-color: #ff0000; /* Синий для акцентов */
+            --secondary-color: #6c757d; /* Серый для второстепенного текста */
+            --bg-light: #f8f9fa; /* Светлый фон */
+            --border-color: #e9ecef; /* Цвет границ */
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
         /* Вспомогательные стили, которых не было в CSS */
         .material-symbols-rounded {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
+            font-family: 'Material Symbols Rounded';
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+            vertical-align: middle;
+            margin-right: 8px;
         }
-        
+
         /* Стили для показа/скрытия контента */
         .content-section {
             display: none; /* Все секции по умолчанию скрыты */
+            padding: 20px;
         }
         .content-section.active {
             display: block; /* Активная секция показывается */
+        }
+        
+        /* Основная структура */
+        .training-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            width: 300px;
+            min-width: 300px;
+            background-color: #f4f6f9;
+            padding: 20px 0;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 0; /* Секции сами имеют padding */
+            overflow-y: auto;
+        }
+        
+        /* Стили для заголовков и параграфов */
+        h1 {
+            color: #000;
+            margin-top: 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-top: 25px;
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #333;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        /* Аккордеон (Группы меню) */
+        .accordion-group {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .accordion-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #e9ecef;
+            border: none;
+            text-align: left;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #333;
+        }
+        
+        .accordion-header:hover {
+            background-color: #dee2e6;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .icon-toggle {
+            transition: transform 0.3s;
+        }
+        
+        /* Меню (Кнопки) */
+        .menu-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s;
+            color: #333;
+            white-space: nowrap;
+        }
+        
+        .menu-button:hover:not(:disabled) {
+            background-color: #e2e6ea;
+        }
+        
+        .menu-button.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .menu-button.active .material-symbols-rounded {
+            color: #fff;
+        }
+        
+        .menu-button:disabled {
+            color: var(--secondary-color);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        /* Подгруппы (Шаги) */
+        .sub-group {
+            padding: 5px 0;
+        }
+        
+        .sub-header {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+        }
+        
+        .sub-content .menu-button {
+            padding-left: 30px; /* Отступ для вложенных кнопок */
+        }
+
+        /* Дополнительные стили для контента */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .content-section ul, .content-section ol {
+            padding-left: 25px;
         }
     </style>
 </head>
@@ -151,20 +337,73 @@
                 <p>Ниже мы подробно разберем каждый шаг твоей подготовки.</p>
             </section>
             
-            <section class="content-section" id="content-binds">
-                <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
-                <h1>1.1. Настройка биндов</h1>
-                <p>"Устная речь" - это РП название биндов. Тебе нужно будет по порядку прожать клавиши, на которых закреплены отыгровки. <strong>Понятие "бинд" в РП чате мы НЕ используем.</strong></p>
-                <h3>Обязательная настройка</h3>
-                <p>Бинды — это твой главный рабочий инструмент. Они экономят время и обеспечивают качественную РП-отыгровку.</p>
-                <ul>
-                    <li><strong>Официальная тема с биндами:</strong> <a href="https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/" target="_blank">https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/</a></li>
-                    <li>Обязательно установите бинды, меняя на свои данные в нужных местах.</li>
-                </ul>
-                
-                <h3 style="background-color: #ffe3dc; padding: 10px; border-radius: 8px;">[ЗДЕСЬ БУДЕТ ТУТОРИАЛ КАК ПОСТАВИТЬ БИНДЫ]</h3>
-                <p><em></em></p>
-            </section>
+<section class="content-section" id="content-binds">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
+    <h1>1.1. Настройка биндов</h1>
+    <p>"Устная речь" - это РП название биндов. Тебе нужно будет по порядку прожать клавиши, на которых закреплены отыгровки. <strong>Понятие "бинд" в РП чате мы НЕ используем.</strong></p>
+    <h3>Обязательная настройка</h3>
+    <p>Бинды — это твой главный рабочий инструмент. Они экономят время и обеспечивают качественную РП-отыгровку.</p>
+    <ul>
+        <li><strong>Официальная тема с биндами:</strong> <a href="https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/" target="_blank">https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/</a></li>
+        <li>Обязательно установите бинды, меняя на свои данные в нужных местах.</li>
+    </ul>
+
+    <div style="background-color: #f7f7f7; padding: 20px; border-radius: 8px;">
+        <h2 style="color: #333; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; margin-top: 0;">Пошаговая инструкция по установке биндов</h2>
+
+        <h3>Шаг 1. Получение текста биндов</h3>
+        <p>1. Перейдите по официальной ссылке на форум (см. выше).</p>
+        <p>2. На открывшейся странице найдите и скопируйте нужный текст для приветствия (выделено красным).</p>
+        <div style="margin-top: 15px; margin-bottom: 25px; text-align: center;">
+            <img src="./images/bind/1.png" alt="Скриншот страницы форума с выделенным текстом приветствия" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+            <p style="font-size: 0.9em; color: var(--secondary-color);">Изображение К1: Выделенный текст для копирования.</p>
+        </div>
+        <p style="padding: 10px; background-color: #ffe3dc; border-radius: 4px; font-weight: 600;">
+            <span class="material-symbols-rounded" style="color: var(--primary-color);">warning</span> 
+            Важное правило: Настройку биндов необходимо производить <strong>построчно</strong>. Не копируйте весь блок текста сразу.
+        </p>
+
+        <h3>Шаг 2. Настройка первой строки (Приветствие)</h3>
+        <p>1. Скопируйте <strong>первую строку</strong> бинда (она начинается с <code>bind</code>).</p>
+        <p>2. Откройте игру и нажмите клавишу <strong>F8</strong>, чтобы открыть консоль разработчика.</p>
+        <div style="margin-top: 15px; margin-bottom: 25px; text-align: center;">
+            <img src="./images/bind/2.jpg" alt="Скриншот консоли разработчика в игре" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 4px;">
+            <p style="font-size: 0.9em; color: var(--secondary-color);">Изображение К2: Консоль разработчика (F8).</p>
+        </div>
+        <p>3. Вставьте скопированную строку в консоль (<strong>Ctrl + V</strong>). <strong>Не нажимайте Enter!</strong></p>
+
+        <h4>Редактирование:</h4>
+        <p>Замените шаблон <code>Имя Фамилия</code> на ваше <strong>Имя и Фамилию на русском языке</strong> (например, <strong>Андрей Шмидт</strong>).</p>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+            <li><strong>Убедитесь</strong>, что в строке <strong>отсутствует символ звёздочки *</strong>.</li>
+        </ul>
+        <p>4. После того как вы заменили имя и фамилию, нажмите <strong>Enter</strong>.</p>
+        <p style="padding: 10px; background-color: #e6f7ff; border-left: 3px solid #007bff; border-radius: 4px;">
+            <strong>Проверка:</strong> Если в консоли появилась строка вида <code>* Bound key '1' 'down' to command 'say Здравствуйте, меня зовут [ВАШЕ ИМЯ], я сотрудник ЦГБ города Невский'</code>, вы всё сделали правильно.
+        </p>
+
+        <h3>Шаг 3. Настройка второй строки (Бейдж)</h3>
+        <p>1. Скопируйте <strong>вторую строку</strong> бинда:</p>
+        <div style="background-color: #eee; padding: 10px; border-radius: 4px; font-family: monospace; overflow-x: auto;">
+            <code>bind 2 do На груди висит бейдж: "ЦГБ г. Невский | *Должность* | Отделение интернатуры | *Имя Фамилия*".</code>
+        </div>
+        <p>2. Вставьте строку в консоль и отредактируйте два поля:</p>
+        <ul style="list-style-type: decimal; margin-left: 20px;">
+            <li>Замените <code>*Должность*</code> на <strong>Интерн</strong>.</li>
+            <li>Замените <code>*Имя Фамилия*</code> на ваше <strong>Имя и Фамилию</strong> на русском языке.</li>
+        </ul>
+        <p>3. Нажмите <strong>Enter</strong>.</p>
+        <p style="padding: 10px; background-color: #e6f7ff; border-left: 3px solid #007bff; border-radius: 4px;">
+            <strong>Проверка:</strong> Если в консоли появилась строка, содержащая <strong>Интерн</strong> и ваше имя, вы сделали всё верно.
+        </p>
+        <p><em>(Когда повыситесь, замените <strong>Интерн</strong> на <strong>Фельдшер</strong>.)</em></p>
+
+        <h3>Шаг 4. Завершение настройки</h3>
+        <p>Остальные строки биндов не требуют ручной корректировки ваших данных.</p>
+        <p>Просто продолжайте <strong>построчно</strong> копировать и вставлять все оставшиеся бинды из списка, нажимая <strong>Enter</strong> после каждой строки.</p>
+        <p style="font-weight: 700; margin-top: 20px; text-align: center;">Поздравляем! Настройка биндов завершена. Удачи в обучении!</p>
+    </div>
+</section>
             
             <section class="content-section" id="content-radio">
                 <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
@@ -191,23 +430,30 @@
             <section class="content-section" id="content-reports">
                 <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 1: ПОДГОТОВКА</p>
                 <h1>1.3. Доклады в рацию (Раздел 6)</h1>
-                <p>Доклад в рацию состоит из <strong>ТЭГА</strong> и сути доклада. ТЭГ устроен следующим образом: <code>отделение-инициалы</code>.</p>
-                <p><em>Пример: Вы состоите в отделении интернатуры и вас зовут Серафим Левандовский. Ваш ТЭГ будет выглядеть так: <strong>ОИ-СЛ</strong>.</em></p>
+                <p>Доклад в рацию состоит из <strong>ТЭГА</strong> и сути доклада. ТЭГ устроен следующим образом: <strong>отделение-инициалы</strong>.</p>
+                <p><em>Пример: Вы состоите в отделении интернатуры и вас зовут Андрей Шмидт. Ваш ТЭГ будет выглядеть так: <strong>ОИ-АШ</strong>.</em></p>
                 
                 <h3>Шаблоны докладов</h3>
                 <details>
-                  <summary><strong>Мужские доклады (Нажмите, чтобы развернуть)</strong></summary>
-                  <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
-                    ... (Тут будет текст из "Мужские доклады" Раздела 6) ...
-                    Для интернов ес чё
-                  </p>
+                    <summary><strong>Мужские доклады (Нажмите, чтобы развернуть)</strong></summary>
+                    <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                        <strong>Заступление на смену:</strong> /r ОИ-Инициалы. Заступил на смену.<br>
+                        <strong>Сдача смены:</strong> /r ОИ-Инициалы. Сдал смену.<br>
+                        <strong>Перерыв:</strong> /r ОИ-Инициалы. Вышел на обеденный перерыв.<br>
+                        <strong>Окончание перерыва:</strong> /r ОИ-Инициалы. Вернулся с обеденного перерыва.<br>
+                        <em>Для интернов доступны только "Заступление на смену" и "Сдача смены".</em>
+                    </p>
                 </details>
                 <br>
                 <details>
-                  <summary><strong>Женские доклады (Нажмите, чтобы развернуть)</strong></summary>
-                  <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
-                    ... (Тут будет текст из "Женские доклады" Раздела 6) ...
-                  </p>
+                    <summary><strong>Женские доклады (Нажмите, чтобы развернуть)</strong></summary>
+                    <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                        <strong>Заступление на смену:</strong> /r ОИ-Инициалы. Заступила на смену.<br>
+                        <strong>Сдача смены:</strong> /r ОИ-Инициалы. Сдала смену.<br>
+                        <strong>Перерыв:</strong> /r ОИ-Инициалы. Вышла на обеденный перерыв.<br>
+                        <strong>Окончание перерыва:</strong> /r ОИ-Инициалы. Вернулась с обеденного перерыва.<br>
+                        <em>Для интернов доступны только "Заступление на смену" и "Сдача смены".</em>
+                    </p>
                 </details>
             </section>
 
@@ -282,103 +528,103 @@
             <section class="content-section" id="content-abbr">
                 <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 3: ЭКЗАМЕН (ТЕОРИЯ)</p>
                 <h1>3.1. Аббревиатуры (Раздел 1)</h1>
-                  <ul style="margin-top: 15px;">
-                    <li><b>МЗ</b> - Министерство Здравоохранения</li>
-                    <li><b>ЦГБ-Н</b> - Центральная Городская Больница города Невский</li>
-                    <li><b>ОПСГО</b> - Общие Правила Сотрудников Государственных Организаций</li>
-                    <li><b>ПРСГО</b> - Правила Руководящего Состава Государственных Организаций</li>
-                    <li><b>ОУМЗ</b> - Общий Устав Министерства Здравоохранения</li>
-                    <li><b>ВУ</b> - Внутренний Устав</li>
-                    <li><b>ГСзФ</b> - Главный Следящий за Фракциями</li>
-                    <li><b>ЗГСзФ</b> - Заместитель Главного Следящего за Фракциями</li>
-                    <li><b>ГС</b> - Главный Следящий</li>
-                    <li><b>ПГС</b> - Помощник Главного Следящего</li>
-                    <li><b>ГВ</b> - Главный Врач</li>
-                    <li><b>ПЗГВ</b> - Первый Заместитель Главного Врача</li>
-                    <li><b>ЗГВ</b> - Заместитель Главного Врача</li>
-                    <li><b>ЗО</b> - Заведующий Отделением</li>
-                    <li><b>ЗЗО</b> - Заместитель Заведующего Отделени</li>
-                    <li><b>ВрИО</b> - Временно Исполняющий Обязанности</li>
-                    <li><b>ИО</b> - Исполняющий Обязанности</li>
-                    <li><b>РС</b> - Руководящий Состав</li>
-                    <li><b>МС</b> - Младший Состав</li>
-                    <li><b>ОДС</b> - Отделение Дневного Стационара</li>
-                    <li><b>ОИК</b> - Отделение Инфекционного Контроля</li>
-                    <li><b>СОП</b> - Стоматологическое Отделение Поликлиники</li>
-                    <li><b>ОПРС</b> - Отделение Подготовки Руководящего Состава</li>
-                    <li><b>ОИ</b> - Отделение Интернатуры</li>
-                    <li><b>АСМП</b> - Автомобиль Скорой Медицинской Помощи</li>
-                    <li><b>ВСМП</b> - Вертолёт Скорой Медицинской Помощи</li>
-                    <li><b>РАСМП</b> - Реанимационный Автомобиль Скорой Медицинской Помощи</li>
-                    <li><b>ЖА</b> - Журнал Активности</li>
-                    <li><b>МП</b> - Мероприятие</li>
-                    <li><b>ПСЖ</b> - По Собственному Желанию</li>
-                    <li><b>УП</b> - Уважительная Причина</li>
-                    <li><b>ТКМ</b> - Теоретический Квалификационный Модуль</li>
-                    <li><b>КМН</b> - Кандидат Медицинских Наук</li>
-                    <li><b>ДМН</b> - Доктор Медицинских Наук</li>
-                  </ul>
+                    <ul style="margin-top: 15px;">
+                        <li><b>МЗ</b> - Министерство Здравоохранения</li>
+                        <li><b>ЦГБ-Н</b> - Центральная Городская Больница города Невский</li>
+                        <li><b>ОПСГО</b> - Общие Правила Сотрудников Государственных Организаций</li>
+                        <li><b>ПРСГО</b> - Правила Руководящего Состава Государственных Организаций</li>
+                        <li><b>ОУМЗ</b> - Общий Устав Министерства Здравоохранения</li>
+                        <li><b>ВУ</b> - Внутренний Устав</li>
+                        <li><b>ГСзФ</b> - Главный Следящий за Фракциями</li>
+                        <li><b>ЗГСзФ</b> - Заместитель Главного Следящего за Фракциями</li>
+                        <li><b>ГС</b> - Главный Следящий</li>
+                        <li><b>ПГС</b> - Помощник Главного Следящего</li>
+                        <li><b>ГВ</b> - Главный Врач</li>
+                        <li><b>ПЗГВ</b> - Первый Заместитель Главного Врача</li>
+                        <li><b>ЗГВ</b> - Заместитель Главного Врача</li>
+                        <li><b>ЗО</b> - Заведующий Отделением</li>
+                        <li><b>ЗЗО</b> - Заместитель Заведующего Отделени</li>
+                        <li><b>ВрИО</b> - Временно Исполняющий Обязанности</li>
+                        <li><b>ИО</b> - Исполняющий Обязанности</li>
+                        <li><b>РС</b> - Руководящий Состав</li>
+                        <li><b>МС</b> - Младший Состав</li>
+                        <li><b>ОДС</b> - Отделение Дневного Стационара</li>
+                        <li><b>ОИК</b> - Отделение Инфекционного Контроля</li>
+                        <li><b>СОП</b> - Стоматологическое Отделение Поликлиники</li>
+                        <li><b>ОПРС</b> - Отделение Подготовки Руководящего Состава</li>
+                        <li><b>ОИ</b> - Отделение Интернатуры</li>
+                        <li><b>АСМП</b> - Автомобиль Скорой Медицинской Помощи</li>
+                        <li><b>ВСМП</b> - Вертолёт Скорой Медицинской Помощи</li>
+                        <li><b>РАСМП</b> - Реанимационный Автомобиль Скорой Медицинской Помощи</li>
+                        <li><b>ЖА</b> - Журнал Активности</li>
+                        <li><b>МП</b> - Мероприятие</li>
+                        <li><b>ПСЖ</b> - По Собственному Желанию</li>
+                        <li><b>УП</b> - Уважительная Причина</li>
+                        <li><b>ТКМ</b> - Теоретический Квалификационный Модуль</li>
+                        <li><b>КМН</b> - Кандидат Медицинских Наук</li>
+                        <li><b>ДМН</b> - Доктор Медицинских Наук</li>
+                    </ul>
             </section>
             
             <section class="content-section" id="content-drugs">
                 <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 3: ЭКЗАМЕН (ТЕОРИЯ)</p>
                 <h1>3.2. Список препаратов (Раздел 3)</h1>
-                  <ul style="margin-top: 15px;">
-                    <li><b>Головная боль:</b> (спрашиваем, как сильно болит голова)
-                      <ul>
-                        <li><b>Обычная</b> - Пенталгин, Спазган, Некст, Дексалгин;</li>
-                        <li><b>Сильная (мигрень)</b> - Амигрен, Сумамигрен;</li>
-                      </ul>
-                    </li>
-                    <li><b>Судороги, нервный тик</b> - Магнелис, Аспаркам;</li>
-                    <li><b>Боль в животе:</b> (спрашиваем вид боли)
-                      <ul>
-                        <li><b>Тошнота</b> - Церукал, Драмина;</li>
-                        <li><b>Спазмы</b> - Но-шпа, Дротаверин;</li>
-                        <li><b>Диарея</b> - Лоперамид, Лопедиум;</li>
-                        <li><b>Отравление</b> - Энтеродез, Энтеросгель, Смекта;</li>
-                        <li><b>Изжога:</b> Ренни, Маалокс, Мотилиум.</li>
-                      </ul>
-                    </li>
-                    <li><b>Боль в печени:</b> Карсил Форте, Гепабене.</li>
-                    <li><b>Боль в сердце:</b> Кардиомагнил, Ацетилсалициловая кислота, Клопидогрел, Варфавин, Ксарелто, Периндоприл,Лозартан, Карведилол, Триметазидин. (после принятия таблетки необходимо провести ЭКГ)</li>
-                    <li><b>Простуда и жар:</b> Терафлю, Колдрекс, Антигриппин.</li>
-                    <li><b>Кашель:</b> Лазолван, Стоптуссин, Пертуссин.</li>
-                    <li><b>Боль в горле:</b>
-                      <ul>
-                        <li><b>Спреи</b> - Гексорал, Стопангин, Тантум-Верде;</li>
-                        <li><b>Таблетки для рассасывания</b> - Стрепсилс, Граммидин;</li>
-                      </ul>
-                    </li>
-                    <li><b>Насморк:</b> Тизин, Снуп, Отривин.</li>
-                    <li><b>Боль в спине, ногах и суставах:</b> Фастум-гель, Кетонал, Долгит, Капсикам, Финалгон.</li>
-                    <li><b>Мази от ушибов и ссадин:</b> Долобене, Лиотон, Троксевазин, Фенистил, Кетонал.</li>
-                    <li><b>Повышенное давление:</b> Андипал.</li>
-                    <li><b>Пониженное давление:</b> Норадреналин, Кофеин (таблетки под язык), Кордиамин.</li>
-                    <li><b>Аллергия:</b> Зиртек, Эриус, Зодак, Тавегил.</li>
-                    <li><b>Ожоги:</b> Пантенол.</li>
-                    <li><b>Глазная боль:</b> Визин, Альбуцид.</li>
-                    <li><b>Боль в ушах:</b> Отипакс.</li>
-                    <li><b>Боль в почках:</b> Уролесан, Пролит.</li>
-                    <li><b>Боль в мочевом пузыре:</b> Цистон, Фитолизин.</li>
-                    <li><b>Сотрясение:</b> Диакарб и Пирацетам.</li>
-                    <li><b>Витамины:</b> Компливит, Витрум.</li>
-                    <li><b>При сахарном диабете:</b> Виктоза, Диабетон, Астрозон.</li>
-                  </ul>
+                    <ul style="margin-top: 15px;">
+                        <li><b>Головная боль:</b> (спрашиваем, как сильно болит голова)
+                            <ul>
+                                <li><b>Обычная</b> - Пенталгин, Спазган, Некст, Дексалгин;</li>
+                                <li><b>Сильная (мигрень)</b> - Амигрен, Сумамигрен;</li>
+                            </ul>
+                        </li>
+                        <li><b>Судороги, нервный тик</b> - Магнелис, Аспаркам;</li>
+                        <li><b>Боль в животе:</b> (спрашиваем вид боли)
+                            <ul>
+                                <li><b>Тошнота</b> - Церукал, Драмина;</li>
+                                <li><b>Спазмы</b> - Но-шпа, Дротаверин;</li>
+                                <li><b>Диарея</b> - Лоперамид, Лопедиум;</li>
+                                <li><b>Отравление</b> - Энтеродез, Энтеросгель, Смекта;</li>
+                                <li><b>Изжога:</b> Ренни, Маалокс, Мотилиум.</li>
+                            </ul>
+                        </li>
+                        <li><b>Боль в печени:</b> Карсил Форте, Гепабене.</li>
+                        <li><b>Боль в сердце:</b> Кардиомагнил, Ацетилсалициловая кислота, Клопидогрел, Варфавин, Ксарелто, Периндоприл,Лозартан, Карведилол, Триметазидин. (после принятия таблетки необходимо провести ЭКГ)</li>
+                        <li><b>Простуда и жар:</b> Терафлю, Колдрекс, Антигриппин.</li>
+                        <li><b>Кашель:</b> Лазолван, Стоптуссин, Пертуссин.</li>
+                        <li><b>Боль в горле:</b>
+                            <ul>
+                                <li><b>Спреи</b> - Гексорал, Стопангин, Тантум-Верде;</li>
+                                <li><b>Таблетки для рассасывания</b> - Стрепсилс, Граммидин;</li>
+                            </ul>
+                        </li>
+                        <li><b>Насморк:</b> Тизин, Снуп, Отривин.</li>
+                        <li><b>Боль в спине, ногах и суставах:</b> Фастум-гель, Кетонал, Долгит, Капсикам, Финалгон.</li>
+                        <li><b>Мази от ушибов и ссадин:</b> Долобене, Лиотон, Троксевазин, Фенистил, Кетонал.</li>
+                        <li><b>Повышенное давление:</b> Андипал.</li>
+                        <li><b>Пониженное давление:</b> Норадреналин, Кофеин (таблетки под язык), Кордиамин.</li>
+                        <li><b>Аллергия:</b> Зиртек, Эриус, Зодак, Тавегил.</li>
+                        <li><b>Ожоги:</b> Пантенол.</li>
+                        <li><b>Глазная боль:</b> Визин, Альбуцид.</li>
+                        <li><b>Боль в ушах:</b> Отипакс.</li>
+                        <li><b>Боль в почках:</b> Уролесан, Пролит.</li>
+                        <li><b>Боль в мочевом пузыре:</b> Цистон, Фитолизин.</li>
+                        <li><b>Сотрясение:</b> Диакарб и Пирацетам.</li>
+                        <li><b>Витамины:</b> Компливит, Витрум.</li>
+                        <li><b>При сахарном диабете:</b> Виктоза, Диабетон, Астрозон.</li>
+                    </ul>
             </section>
 
             <section class="content-section" id="content-deps">
                 <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ШАГ 3: ЭКЗАМЕН (ТЕОРИЯ)</p>
                 <h1>3.3. Отделения ЦГБ (Раздел 5)</h1>
                 <p>Ты должен понимать структуру нашей больницы.</p>
-                  
-                  <ul style="margin-top: 15px;">
-                    <li><b>Отделение Интернатуры (ОИ)</b> - это одно из отделений ЦГБ города Невский, сотрудники которого обучаются работе в нашей больнице.</li>
-                    <li><b>Отделение Дневного Стационара (ОДС)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе Травматолого-ортопедического центра, проведением проверок аптек и травматологических рейдов для населения и сотрудников государственных организаций.</li>
-                    <li><b>Отделение Инфекционного Контроля (ОИК)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе НИИ Эпидемиологии, проведением санитарных проверок и инфекционных рейдов для населения и сотрудников государственных организаций.</li>
-                    <li><b>Стоматологическое Отделение Поликлиники (СОП)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе Стоматологической поликлиники "Дентиста" и проведением стоматологических рейдов для населения и сотрудников государственных организаций.</li>
-                    <li><b>Отделение Подготовки Руководящего Состава (ОПРС)</b> - это одно из отделений ЦГБ города Невский, сотрудники которого проходят курсы повышения квалификации для дальнейшей работы в Руководящем составе больницы.</li>
-                  </ul>
+                    
+                    <ul style="margin-top: 15px;">
+                        <li><b>Отделение Интернатуры (ОИ)</b> - это одно из отделений ЦГБ города Невский, сотрудники которого обучаются работе в нашей больнице.</li>
+                        <li><b>Отделение Дневного Стационара (ОДС)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе Травматолого-ортопедического центра, проведением проверок аптек и травматологических рейдов для населения и сотрудников государственных организаций.</li>
+                        <li><b>Отделение Инфекционного Контроля (ОИК)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе НИИ Эпидемиологии, проведением санитарных проверок и инфекционных рейдов для населения и сотрудников государственных организаций.</li>
+                        <li><b>Стоматологическое Отделение Поликлиники (СОП)</b> – это одно из отделений ЦГБ города Невский, сотрудники которого занимаются как основной работой больницы, так и оказанием услуг на базе Стоматологической поликлиники "Дентиста" и проведением стоматологических рейдов для населения и сотрудников государственных организаций.</li>
+                        <li><b>Отделение Подготовки Руководящего Состава (ОПРС)</b> - это одно из отделений ЦГБ города Невский, сотрудники которого проходят курсы повышения квалификации для дальнейшей работы в Руководящем составе больницы.</li>
+                    </ul>
 
             </section>
 
@@ -429,10 +675,23 @@
                     const isExpanded = header.getAttribute('aria-expanded') === 'true';
                     const icon = header.querySelector('.icon-toggle');
 
+                    // Закрываем все, кроме текущего
+                    accordionHeaders.forEach(h => {
+                        if (h !== header && h.getAttribute('aria-expanded') === 'true') {
+                            h.setAttribute('aria-expanded', 'false');
+                            h.nextElementSibling.style.maxHeight = null;
+                            const hIcon = h.querySelector('.icon-toggle');
+                            if(hIcon) hIcon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+
                     // Открываем/Закрываем текущий
                     if (!isExpanded) {
                         header.setAttribute('aria-expanded', 'true');
-                        content.style.maxHeight = content.scrollHeight + 'px';
+                        // Используем setTimeout, чтобы браузер успел обработать скрытие других аккордеонов
+                        setTimeout(() => {
+                            content.style.maxHeight = content.scrollHeight + 'px';
+                        }, 0); 
                         if(icon) icon.style.transform = 'rotate(180deg)';
                     } else {
                         header.setAttribute('aria-expanded', 'false');
@@ -442,10 +701,19 @@
                 });
             });
 
-            // Авто-открытие первого аккордеона
-            const firstAccordion = document.querySelector('.accordion-header');
+            // Авто-открытие первого аккордеона, если он еще не открыт (для случая, когда клик не нужен)
+            const firstAccordion = document.querySelector('.accordion-header[aria-expanded="true"]');
             if(firstAccordion) {
-                firstAccordion.click();
+                const content = firstAccordion.nextElementSibling;
+                content.style.maxHeight = content.scrollHeight + 'px';
+                const icon = firstAccordion.querySelector('.icon-toggle');
+                if(icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                // Если ни один не открыт по умолчанию, откроем первый
+                const defaultFirst = document.querySelector('.accordion-header');
+                if(defaultFirst) {
+                    defaultFirst.click(); // Имитация клика для открытия
+                }
             }
 
             // --- 2. Логика переключения контента ---
@@ -472,9 +740,10 @@
                         targetSection.classList.add('active');
                     }
 
-                    // 5. Скроллим контент наверх (полезно на мобильных)
+                    // 5. Скроллим контент наверх
                     if (contentArea) {
-                        contentArea.scrollTop = 0;
+                        // Используем scrollIntoView для плавного скролла
+                        contentArea.querySelector('.content-section.active').scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
             });
