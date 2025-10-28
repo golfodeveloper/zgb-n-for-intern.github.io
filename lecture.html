@@ -10,209 +10,323 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://mz.kaze.red/images/logo.svg" type="image/svg+xml">
+
+<style>
+    :root {
+        /* Светлая тема (значения по умолчанию) */
+        --primary-color: #e44d26; /* Более насыщенный красный */
+        --secondary-color: #495057; /* Темно-серый для второстепенного текста */
+        --text-color: #212529; /* Почти черный для основного текста */
+        --bg-main: #ffffff; /* Чистый белый фон контента */
+        --bg-sidebar: #f8f9fa; /* Светлый фон сайдбара */
+        --bg-light: #f2f4f6; /* Очень светлый фон страницы */
+        --border-color: #dee2e6; /* Легкие границы */
+        --bg-code: #e9ecef; /* Светлый фон для кода */
+        --bg-warning: #fff3cd; /* Мягкий желтоватый фон для предупреждений */
+        --text-warning: #856404; /* Темно-желтый текст для предупреждений */
+        --bg-info: #d1ecf1; /* Светло-голубой фон для информации */
+        --text-info: #0c5460; /* Темно-голубой текст для информации */
+        --border-info: #007bff; /* Граница для инфо-блоков */
+        --sidebar-hover: #e9ecef; /* Цвет при наведении на кнопки сайдбара */
+        --accordion-header-bg: #e9ecef; /* Фон заголовка аккордеона */
+        --floating-btn-bg: var(--primary-color); /* Фон плавающей кнопки */
+        --floating-btn-text: #fff; /* Текст плавающей кнопки */
+    }
+
+    body.dark-mode {
+        /* Темная тема */
+        --primary-color: #ff6b6b; /* Яркий, но не кричащий красный */
+        --secondary-color: #adb5bd; /* Светло-серый */
+        --text-color: #e0e0e0; /* Светлый текст */
+        --bg-main: #2d2d2d; /* Темный фон контента (немного светлее, чем основной) */
+        --bg-sidebar: #212121; /* Очень темный сайдбар */
+        --bg-light: #1a1a1a; /* Самый темный фон страницы */
+        --border-color: #444444; /* Темные, но различимые границы */
+        --bg-code: #3a3a3a; /* Темный фон для кода */
+        --bg-warning: #5e3a3a; /* Темный красный для предупреждений */
+        --text-warning: #ffcccc; /* Светлый текст для предупреждений */
+        --bg-info: #3a4f5f; /* Темно-синий для информации */
+        --text-info: #cce5ff; /* Светло-синий текст для информации */
+        --border-info: #66b3ff; /* Яркая граница для инфо-блоков */
+        --sidebar-hover: #3a3a3a; /* Цвет при наведении на кнопки сайдбара */
+        --accordion-header-bg: #2d2d2d; /* Фон заголовка аккордеона */
+        --floating-btn-bg: var(--primary-color);
+        --floating-btn-text: #fff;
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-light);
+        color: var(--text-color); /* Используем переменную */
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Вспомогательные стили, которых не было в CSS */
+    .material-symbols-rounded {
+        font-family: 'Material Symbols Rounded';
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+
+    /* Стили для показа/скрытия контента */
+    .content-section {
+        display: none; /* Все секции по умолчанию скрыты */
+        padding: 20px;
+    }
+    .content-section.active {
+        display: block; /* Активная секция показывается */
+    }
     
-    <style>
-        :root {
-            --primary-color: #ff0000; /* Синий для акцентов */
-            --secondary-color: #6c757d; /* Серый для второстепенного текста */
-            --bg-light: #f8f9fa; /* Светлый фон */
-            --border-color: #e9ecef; /* Цвет границ */
-        }
+    /* Основная структура */
+    .training-container {
+        display: flex;
+        min-height: 100vh;
+        max-width: 1400px;
+        margin: 0 auto;
+        background-color: var(--bg-main); /* Используем переменную */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-light);
-            color: #333;
-        }
+    .sidebar {
+        width: 300px;
+        min-width: 300px;
+        background-color: var(--bg-sidebar); /* Используем переменную */
+        padding: 20px 0;
+        border-right: 1px solid var(--border-color);
+        overflow-y: auto;
+    }
 
-        /* Вспомогательные стили, которых не было в CSS */
-        .material-symbols-rounded {
-            font-family: 'Material Symbols Rounded';
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
+    .content {
+        flex-grow: 1;
+        padding: 0; /* Секции сами имеют padding */
+        overflow-y: auto;
+    }
+    
+    /* Стили для заголовков и параграфов */
+    h1 {
+        color: var(--text-color); /* Черный/белый */
+        margin-top: 0;
+        font-size: 2em;
+        font-weight: 700;
+    }
+    
+    h2 {
+        color: var(--primary-color);
+        margin-top: 25px;
+        font-size: 1.5em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 5px;
+    }
+    
+    h3 {
+        color: var(--text-color);
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: 600; /* Добавил, чтобы не было конфликта с общими стилями */
+    }
+    
+    p {
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    
+    ul, ol {
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }
+    
+    ul li, ol li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+    
+    /* Аккордеон (Группы меню) */
+    .accordion-group {
+        margin-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .accordion-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: var(--accordion-header-bg); /* Используем переменную */
+        border: none;
+        text-align: left;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        color: var(--text-color);
+    }
+    
+    .accordion-header:hover {
+        background-color: var(--sidebar-hover);
+    }
+    
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
 
-        /* Стили для показа/скрытия контента */
-        .content-section {
-            display: none; /* Все секции по умолчанию скрыты */
-            padding: 20px;
-        }
-        .content-section.active {
-            display: block; /* Активная секция показывается */
-        }
-        
-        /* Основная структура */
-        .training-container {
-            display: flex;
-            min-height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .icon-toggle {
+        transition: transform 0.3s;
+    }
+    
+    /* Меню (Кнопки) */
+    .menu-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background: none;
+        border: none;
+        text-align: left;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.15s, color 0.15s;
+        color: var(--text-color);
+        white-space: nowrap;
+    }
+    
+    .menu-button:hover:not(:disabled) {
+        background-color: var(--sidebar-hover);
+    }
+    
+    .menu-button.active {
+        background-color: var(--primary-color);
+        color: #fff; /* Текст на активной кнопке всегда белый */
+        font-weight: 600;
+    }
+    
+    .menu-button.active .material-symbols-rounded {
+        color: #fff; /* Иконка на активной кнопке всегда белая */
+    }
+    
+    .menu-button:disabled {
+        color: var(--secondary-color);
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    
+    /* Подгруппы (Шаги) */
+    .sub-group {
+        padding: 5px 0;
+    }
+    
+    .sub-header {
+        padding: 8px 20px;
+        font-size: 0.9em;
+        font-weight: 700;
+        color: var(--secondary-color);
+        text-transform: uppercase;
+    }
+    
+    .sub-content .menu-button {
+        padding-left: 30px; /* Отступ для вложенных кнопок */
+    }
 
-        .sidebar {
-            width: 300px;
-            min-width: 300px;
-            background-color: #f4f6f9;
-            padding: 20px 0;
-            border-right: 1px solid var(--border-color);
-            overflow-y: auto;
-        }
+    /* Дополнительные стили для контента */
+    a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
 
-        .content {
-            flex-grow: 1;
-            padding: 0; /* Секции сами имеют padding */
-            overflow-y: auto;
-        }
-        
-        /* Стили для заголовков и параграфов */
-        h1 {
-            color: #000;
-            margin-top: 0;
-            font-size: 2em;
-            font-weight: 700;
-        }
-        
-        h2 {
-            color: var(--primary-color);
-            margin-top: 25px;
-            font-size: 1.5em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-        
-        h3 {
-            color: #333;
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-        
-        p {
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-        
-        /* Аккордеон (Группы меню) */
-        .accordion-group {
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .accordion-header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: #e9ecef;
-            border: none;
-            text-align: left;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            color: #333;
-        }
-        
-        .accordion-header:hover {
-            background-color: #dee2e6;
-        }
-        
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-in-out;
-        }
+    .content-section ul, .content-section ol {
+        padding-left: 25px;
+    }
+    
+    /* Стили для специальных блоков (чтобы работали с темной темой) */
+    .content-section p[style*="background-color: #ffe3dc"], 
+    .content-section p[style*="background-color: #e6f7ff"], 
+    .content-section div[style*="background-color: #f7f7f7"] { 
+        background-color: transparent !important; 
+    }
 
-        .icon-toggle {
-            transition: transform 0.3s;
-        }
-        
-        /* Меню (Кнопки) */
-        .menu-button {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            background: none;
-            border: none;
-            text-align: left;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.15s, color 0.15s;
-            color: #333;
-            white-space: nowrap;
-        }
-        
-        .menu-button:hover:not(:disabled) {
-            background-color: #e2e6ea;
-        }
-        
-        .menu-button.active {
-            background-color: var(--primary-color);
-            color: #fff;
-            font-weight: 600;
-        }
-        
-        .menu-button.active .material-symbols-rounded {
-            color: #fff;
-        }
-        
-        .menu-button:disabled {
-            color: var(--secondary-color);
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        
-        /* Подгруппы (Шаги) */
-        .sub-group {
-            padding: 5px 0;
-        }
-        
-        .sub-header {
-            padding: 8px 20px;
-            font-size: 0.9em;
-            font-weight: 700;
-            color: var(--secondary-color);
-            text-transform: uppercase;
-        }
-        
-        .sub-content .menu-button {
-            padding-left: 30px; /* Отступ для вложенных кнопок */
-        }
+    .content-section p[style*="background-color: #ffe3dc"] {
+        background-color: var(--bg-warning) !important;
+        color: var(--text-warning) !important; /* Новый цвет текста */
+    }
+    .content-section p[style*="background-color: #ffe3dc"] .material-symbols-rounded {
+        color: var(--text-warning) !important; /* Цвет иконки для предупреждений */
+    }
+    
+    .content-section p[style*="background-color: #e6f7ff"] {
+        background-color: var(--bg-info) !important;
+        border-left-color: var(--border-info) !important;
+        color: var(--text-info) !important; /* Новый цвет текста */
+    }
+    
+    .content-section div[style*="background-color: #f7f7f7"] {
+        background-color: var(--bg-sidebar) !important;
+    }
 
-        /* Дополнительные стили для контента */
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
+    /* Стили для кода */
+    .content-section code {
+        background-color: var(--bg-code);
+        color: var(--text-color);
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+    
+    .content-section div[style*="font-family: monospace"] {
+        background-color: var(--bg-code) !important;
+        color: var(--text-color) !important;
+        border: 1px solid var(--border-color);
+    }
+    
+    /* ------------------------------------------------------------------- */
+    /* СТИЛИ ДЛЯ ПЛАВАЮЩЕЙ КНОПКИ */
+    /* ------------------------------------------------------------------- */
+    .floating-button {
+        position: fixed;
+        bottom: 30px; 
+        right: 30px; 
+        z-index: 1000;
         
-        a:hover {
-            text-decoration: underline;
-        }
+        /* Стилизация */
+        background-color: var(--floating-btn-bg); /* Используем переменную */
+        color: var(--floating-btn-text); /* Используем переменную */
+        border: none;
+        border-radius: 50px; 
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1em;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
 
-        .content-section ul, .content-section ol {
-            padding-left: 25px;
-        }
-    </style>
+    .floating-button:hover {
+        background-color: var(--primary-color); /* При наведении немного меняем, но в рамках акцентного */
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .floating-button .material-symbols-rounded {
+        margin: 0;
+        color: var(--floating-btn-text); /* Иконка всегда белая на кнопке */
+    }
+
+    /* JavaScript не нужно менять, так как он работает с классами и переменными */
+</style>
 </head>
 <body>
 
@@ -309,9 +423,29 @@
                     <span class="material-symbols-rounded icon-toggle">expand_more</span>
                 </button>
                 <div class="accordion-content">
-                    <button class="menu-button" disabled>
-                        <span class="material-symbols-rounded">construction</span>
-                        В разработке
+                    <button class="menu-button" data-target="content-promotion">
+                        <span class="material-symbols-rounded">celebration</span>
+                        Поздравление
+                    </button>
+                    <button class="menu-button" data-target="content-patrol">
+                        <span class="material-symbols-rounded">directions_walk</span>
+                        Пешее патрулирование (Раздел 10)
+                    </button>
+                    <button class="menu-button" data-target="content-prmo">
+                        <span class="material-symbols-rounded">medical_services</span>
+                        Выезды на ПРМО (Раздел 11)
+                    </button>
+                    <button class="menu-button" data-target="content-asmpposts">
+                        <span class="material-symbols-rounded">local_hospital</span>
+                        Работа на Постах АСМП (Раздел 7)
+                    </button>
+                    <button class="menu-button" data-target="content-vehicle">
+                        <span class="material-symbols-rounded">ambulance</span>
+                        Использование Автопарка (Раздел 12)
+                    </button>
+                    <button class="menu-button" data-target="content-uniform">
+                        <span class="material-symbols-rounded">dry_cleaning</span>
+                        Смена формы (Раздел 13)
                     </button>
                 </div>
             </div>
@@ -344,12 +478,12 @@
     <h3>Обязательная настройка</h3>
     <p>Бинды — это твой главный рабочий инструмент. Они экономят время и обеспечивают качественную РП-отыгровку.</p>
     <ul>
-        <li><strong>Официальная тема с биндами:</strong> <a href="https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/" target="_blank">https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-dlya-sotrudnikov/</a></li>
+        <li><strong>Официальная тема с биндами:</strong> <a href="https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-для-sotrudnikov/" target="_blank">https://forum.gtaprovince.ru/topic/995732-cgb-g-nevskiy-bindy-для-sotrudnikov/</a></li>
         <li>Обязательно установите бинды, меняя на свои данные в нужных местах.</li>
     </ul>
 
     <div style="background-color: #f7f7f7; padding: 20px; border-radius: 8px;">
-        <h2 style="color: #333; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; margin-top: 0;">Пошаговая инструкция по установке биндов</h2>
+        <h2 style="color: #ff0077; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; margin-top: 0;">Пошаговая инструкция по установке биндов</h2>
 
         <h3>Шаг 1. Получение текста биндов</h3>
         <p>1. Перейдите по официальной ссылке на форум (см. выше).</p>
@@ -436,7 +570,7 @@
                 <h3>Шаблоны докладов</h3>
                 <details>
                     <summary><strong>Мужские доклады (Нажмите, чтобы развернуть)</strong></summary>
-                    <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                    <p style="padding: 10px; background: #f9f9f9; color: #363636; border-radius: 8px;">
                         <strong>Заступление на смену:</strong> /r ОИ-Инициалы. Заступил на смену.<br>
                         <strong>Сдача смены:</strong> /r ОИ-Инициалы. Сдал смену.<br>
                         <strong>Перерыв:</strong> /r ОИ-Инициалы. Вышел на обеденный перерыв.<br>
@@ -447,7 +581,7 @@
                 <br>
                 <details>
                     <summary><strong>Женские доклады (Нажмите, чтобы развернуть)</strong></summary>
-                    <p style="padding: 10px; background: #f9f9f9; border-radius: 8px;">
+                    <p style="padding: 10px; background: #f9f9f9; color: #363636; border-radius: 8px;">
                         <strong>Заступление на смену:</strong> /r ОИ-Инициалы. Заступила на смену.<br>
                         <strong>Сдача смены:</strong> /r ОИ-Инициалы. Сдала смену.<br>
                         <strong>Перерыв:</strong> /r ОИ-Инициалы. Вышла на обеденный перерыв.<br>
@@ -646,10 +780,36 @@
     </div>
 </section>
 
-            <section class="content-section" id="content-next">
+<section class="content-section" id="content-next">
                 <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ЗАКЛЮЧЕНИЕ</p>
                 <h1>Что дальше?</h1>
-                <p>После того как ты получишь допуск, тебе откроются новые обязанности. Можешь ознакомиться с ними заранее.</p>
+                
+                <h2>Повышение до Фельдшера</h2>
+                <p>После успешной сдачи всех экзаменов и получения допуска к лечению, твой последний шаг в отделении Интернатуры:</p>
+                
+                <ol>
+                    <li>Вылечить <strong>5 человек</strong> (пациентов) в больнице.</li>
+                    <li>Подать заявление на повышение в соответствующем разделе форума.</li>
+                </ol>
+                
+                <h3>Заявление на повышение</h3>
+                <p>Заявление на повышение подается в специальном разделе на форуме: 
+                    <a href="https://forum.gtaprovince.ru/topic/995718-cgb-g-nevskiy-informacionnyy-razdel-otdeleniya-internatury" target="_blank">
+                        https://forum.gtaprovince.ru/topic/995718-cgb-g-nevskiy-informacionnyy-razdel-otdeleniya-internatury
+                    </a>
+                </p>
+
+                <div class="report-form-container">
+                    
+                    
+                    <p style="font-size: 1.2em; color: var(--secondary-color); margin-top: 10px;">
+                        Заполните форму строго по образцу указанному в теме выше.<br>
+                        Форма отчета должна быть скопирована и заполнена в теме форума.
+                    </p>
+                </div>
+                
+                <h2>Другие обязанности</h2>
+                <p>После того как ты повысишься, тебе откроются следующие обязанности:</p>
                 <ul>
                     <li>Пешее патрулирование (с 3 ранга) (Раздел 10)</li>
                     <li>Выезды на ПРМО (Предрейсовый Мед. Осмотр) (Раздел 11)</li>
@@ -657,42 +817,210 @@
                     <li>Использование Автопарка (Раздел 12)</li>
                     <li>Смена формы в соответствии с должностью (Раздел 13)</li>
                 </ul>
-                <p><em>тут я добавлю еще чёто, пока не придумал чё именно.</em></p>
+
             </section>
 
-        </main>
-    </div>
+<section class="content-section" id="content-promotion">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ОТДЕЛЕНИЕ ФЕЛЬДШЕРОВ / ПОВЫШЕНИЕ</p>
+    <h1>Поздравляем с повышением до Фельдшера!</h1>
+    
+    <p>С этого момента Вы официально переведены в Отделение Дневного Стационара (ОДС) и являетесь <strong>Фельдшером</strong> (3 ранг). Вы успешно прошли все этапы обучения и доказали свою готовность к работе.</p>
+    
+    <h2>Твои новые возможности:</h2>
+    <ol>
+        <li>Получен полный допуск к лечению пациентов, в том числе и при вызовах.</li>
+        <li>Разрешено принимать вызовы от граждан (команда <code>/to [ID]</code>).</li>
+        <li>Разрешено выезжать на Пешее Патрулирование (Раздел 10).</li>
+        <li>Разрешено использовать карету Скорой Помощи (АСМП) (с 4-го ранга).</li>
+        <li>Разрешены выезды на Предрейсовые Медицинские Осмотры (ПРМО) (с 4-го ранга).</li>
+        <li>Разрешено нести службу на Постах АСМП (Раздел 7).</li>
+    </ol>
+    
+    <p style="padding: 15px; background-color: var(--bg-info); border-left: 3px solid var(--border-info); border-radius: 4px; color: var(--text-info); font-weight: 600;">
+        <span class="material-symbols-rounded">info</span> 
+        Не забывайте, что с увеличением прав, увеличивается и ответственность. Теперь вы — полноценная боевая единица! Строго соблюдайте Устав и Правила ЦГБ.
+    </p>
+</section>
 
-    <script>
+<section class="content-section" id="content-patrol">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ДОПОЛНИТЕЛЬНЫЕ ОБЯЗАННОСТИ / РАЗДЕЛ 10</p>
+    <h1>Пешее патрулирование (с 3 ранга)</h1>
+    
+    <p>Пешее патрулирование (ПП) — это способ оказания помощи гражданам в общественных местах с высоким скоплением людей. Доступно с 3-го ранга (Фельдшер).</p>
+
+    <h2>Основные правила и процедура</h2>
+    <ol>
+        <li><strong>Цель:</strong> Оказание плановой и экстренной медицинской помощи гражданам, проверка здоровья и выявление больных.</li>
+        <li><strong>Начало ПП:</strong> Прежде чем начать патрулирование, необходимо доложить в рацию (<code>/r</code>):<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Заступил в Пеший Патруль: [Название места].</code>
+            </div>
+        </li>
+        <li><strong>Места ПП:</strong> Вокзалы, рынки, парки, центральные площади. Запрещено патрулировать у государственных учреждений (кроме больницы).</li>
+        <li><strong>Оказание помощи:</strong> Все действия по осмотру, диагностике и лечению должны сопровождаться **полной РП-отыгровкой** (<code>/me</code>, <code>/do</code>, <code>/try</code>).</li>
+        <li><strong>Завершение ПП:</strong> По окончании патрулирования необходимо доложить в рацию:<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Закончил Пеший Патруль. Приступил к работе в ЦГБ.</code>
+            </div>
+        </li>
+    </ol>
+</section>
+
+<section class="content-section" id="content-prmo">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ДОПОЛНИТЕЛЬНЫЕ ОБЯЗАННОСТИ / РАЗДЕЛ 11</p>
+    <h1>Выезды на ПРМО (Предрейсовый Мед. Осмотр)</h1>
+    
+    <p>ПРМО — это обязательный осмотр сотрудников государственных организаций (ГИБДД, ППС, Армия и др.) перед их выходом на смену. Доступно с 4-го ранга.</p>
+    
+    <h2>Процедура проведения ПРМО</h2>
+    <ol>
+        <li><strong>Получение запроса:</strong> Ждите запроса от Руководства или сотрудников других организаций.</li>
+        <li><strong>Выезд:</strong> Используйте служебный автомобиль (АСМП). Перед выездом обязательно доложить в рацию (<code>/r</code>):<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Выехал на ПРМО в [Название организации] на АСМП.</code>
+            </div>
+        </li>
+        <li><strong>На месте:</strong> Представьтесь и попросите у старшего сотрудника список осматриваемых.</li>
+        <li><strong>Осмотр:</strong> Проведите осмотр каждого сотрудника с помощью РП-отыгровок:
+            <ul>
+                <li>Проверка пульса (<code>/me</code>).</li>
+                <li>Измерение артериального давления.</li>
+                <li>Осмотр зрачков на реакцию.</li>
+                <li>Визуальный осмотр на наличие травм или признаков опьянения.</li>
+            </ul>
+        </li>
+        <li><strong>Итог:</strong> После осмотра, если нет противопоказаний, выдайте допуск. Если сотрудник не здоров — дайте рекомендации или выпишите больничный лист.</li>
+        <li><strong>Возвращение:</strong> По возвращении в больницу доложить в рацию:<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Вернулся с ПРМО. Приступил к работе в ЦГБ.</code>
+            </div>
+        </li>
+    </ol>
+</section>
+
+<section class="content-section" id="content-asmpposts">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ДОПОЛНИТЕЛЬНЫЕ ОБЯЗАННОСТИ / РАЗДЕЛ 7</p>
+    <h1>Работа на Постах АСМП</h1>
+    
+    <p>Посты АСМП — это стационарные точки дежурства, созданные для оперативного реагирования на вызовы в отдаленных или особо важных районах города. Доступно с 3-го ранга (Фельдшер).</p>
+    
+    <h2>Порядок несения службы</h2>
+    <ul>
+        <li><strong>Посты:</strong> Актуальный список постов можно узнать у Руководящего состава, но обычно это: Центральный Рынок, Вокзал, КПП между городами.</li>
+        <li><strong>Занятие Поста:</strong> Прибыв на пост, необходимо доложить в рацию (<code>/r</code>):<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Занял Пост №[Номер Поста] на АСМП.</code>
+            </div>
+        </li>
+        <li><strong>Ожидание:</strong> Находясь на посту, ожидайте вызовов (<code>/to [ID]</code>) или появления граждан, нуждающихся в помощи.</li>
+        <li><strong>Снятие с Поста:</strong> По окончании дежурства или при необходимости покинуть пост, необходимо доложить:<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Снят с Поста №[Номер Поста]. Возвращаюсь в ЦГБ.</code>
+            </div>
+        </li>
+        <li><strong>Важно:</strong> Запрещено покидать пост без доклада в рацию. На посту нужно находиться не менее 15 минут.</li>
+    </ul>
+</section>
+
+<section class="content-section" id="content-vehicle">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ДОПОЛНИТЕЛЬНЫЕ ОБЯЗАННОСТИ / РАЗДЕЛ 12</p>
+    <h1>Использование Автопарка</h1>
+    
+    <p>Автопарк ЦГБ используется исключительно для выполнения служебных обязанностей (выезды, патрули, ПРМО). За нецелевое использование предусмотрены наказания.</p>
+
+    <h2>Доступ к транспорту</h2>
+    <ul>
+        <li><strong>АСМП (Автомобиль Скорой Медицинской Помощи):</strong> Доступен с 4-го ранга (Лаборант/Фельдшер). Используется для выездов на вызовы, ПРМО и Постов АСМП.</li>
+        <li><strong>ВСМП (Вертолет Скорой Медицинской Помощи):</strong> Доступен с 7-го ранга. Используется только с разрешения Руководящего состава.</li>
+        <li><strong>Служебные автомобили (не АСМП/ВСМП):</strong> Доступны с 5-го ранга. Могут использоваться для поездок в другие больницы по рабочим вопросам.</li>
+    </ul>
+    
+    <h2>Правила эксплуатации</h2>
+    <ol>
+        <li><strong>Доклад:</strong> Обязательно докладывайте в рацию о взятии и возврате служебного транспорта:<br>
+            <div style="background-color: var(--bg-code); padding: 10px; border-radius: 4px; font-family: monospace;">
+                <code>/r ОДС-Инициалы. Взял АСМП. Выехал на [Цель поездки].</code><br>
+                <code>/r ОДС-Инициалы. Поставил АСМП в гараж.</code>
+            </div>
+        </li>
+        <li><strong>Состояние:</strong> Следите за техническим состоянием (починка) и уровнем топлива (заправка) автомобиля.</li>
+        <li><strong>Парковка:</strong> Всегда паркуйте служебный транспорт строго в гараже ЦГБ.</li>
+    </ol>
+</section>
+
+<section class="content-section" id="content-uniform">
+    <p style="text-transform: uppercase; font-size: 0.8em; color: #666;">ДОПОЛНИТЕЛЬНЫЕ ОБЯЗАННОСТИ / РАЗДЕЛ 13</p>
+    <h1>Смена формы в соответствии с должностью</h1>
+    
+    <p>Сотрудники обязаны носить форму, соответствующую их должности и текущим рабочим задачам. Форма меняется в раздевалке (1 этаж).</p>
+
+    <h2>Основные виды формы</h2>
+    <ul>
+        <li><strong>1-2 ранг (Интерн):</strong> Белый медицинский халат (Форма №1).</li>
+        <li><strong>3 ранг (Фельдшер / Лаборант):</strong> Стандартный медицинский костюм (Форма №2).</li>
+        <li><strong>4-5 ранг:</strong> Доступна Форма №3 (синий медицинский костюм).</li>
+        <li><strong>6 ранг и выше:</strong> Доступна Форма №4 (белый костюм с красными элементами).</li>
+        <li><strong>Руководящий состав (9+):</strong> Разрешен деловой костюм, но при оказании медпомощи — форма по должности.</li>
+    </ul>
+    
+    <p style="padding: 10px; background-color: var(--bg-warning); border-radius: 4px; font-weight: 600; color: var(--text-warning);">
+        <span class="material-symbols-rounded">warning</span> 
+        Запрещено носить гражданскую одежду в рабочее время! Исключение: Руководящий состав с разрешения Главного Врача.
+    </p>
+</section>
+</main>
+    </div>
+    
+    <button id="theme-toggle" class="floating-button" aria-label="Переключить тему" title="Переключить на темную тему">
+        <span class="material-symbols-rounded">dark_mode</span>
+        <span>Тема</span>
+    </button>
+    
+
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // --- 1. Логика Аккордеона ---
+            // --- 1. Логика Аккордеона (ИСПРАВЛЕНО ДЛЯ АВТООТКРЫТИЯ КОНТЕНТА ФЕЛЬДШЕРОВ) ---
             const accordionHeaders = document.querySelectorAll('.accordion-header');
             
             accordionHeaders.forEach(header => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.icon-toggle');
+
+                // Устанавливаем начальное состояние при загрузке страницы
+                const isInitiallyExpanded = header.getAttribute('aria-expanded') === 'true';
+                if (isInitiallyExpanded) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    if(icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    content.style.maxHeight = null;
+                    if(icon) icon.style.transform = 'rotate(0deg)';
+                }
+
                 header.addEventListener('click', () => {
-                    const content = header.nextElementSibling;
                     const isExpanded = header.getAttribute('aria-expanded') === 'true';
-                    const icon = header.querySelector('.icon-toggle');
-
-                    // Закрываем все, кроме текущего
-                    accordionHeaders.forEach(h => {
-                        if (h !== header && h.getAttribute('aria-expanded') === 'true') {
-                            h.setAttribute('aria-expanded', 'false');
-                            h.nextElementSibling.style.maxHeight = null;
-                            const hIcon = h.querySelector('.icon-toggle');
-                            if(hIcon) hIcon.style.transform = 'rotate(0deg)';
-                        }
-                    });
-
+                    
                     // Открываем/Закрываем текущий
                     if (!isExpanded) {
                         header.setAttribute('aria-expanded', 'true');
-                        // Используем setTimeout, чтобы браузер успел обработать скрытие других аккордеонов
+                        // Используем setTimeout для корректного расчета высоты после смены атрибута
                         setTimeout(() => {
                             content.style.maxHeight = content.scrollHeight + 'px';
                         }, 0); 
                         if(icon) icon.style.transform = 'rotate(180deg)';
+
+                        // --- НОВАЯ ЛОГИКА: АВТОМАТИЧЕСКИЙ ВЫБОР КОНТЕНТА ПРИ ОТКРЫТИИ ---
+                        const headerText = header.querySelector('span:first-child').textContent.trim();
+                        if (headerText === 'Фельдшеры') {
+                            // Находим первую кнопку внутри этого аккордеона ('Поздравление')
+                            const firstButton = content.querySelector('.menu-button');
+                            if (firstButton) {
+                                // Имитируем клик на кнопку, чтобы активировать контент
+                                firstButton.click(); 
+                            }
+                        }
+                        // --- КОНЕЦ НОВОЙ ЛОГИКИ ---
+
                     } else {
                         header.setAttribute('aria-expanded', 'false');
                         content.style.maxHeight = null;
@@ -700,21 +1028,6 @@
                     }
                 });
             });
-
-            // Авто-открытие первого аккордеона, если он еще не открыт (для случая, когда клик не нужен)
-            const firstAccordion = document.querySelector('.accordion-header[aria-expanded="true"]');
-            if(firstAccordion) {
-                const content = firstAccordion.nextElementSibling;
-                content.style.maxHeight = content.scrollHeight + 'px';
-                const icon = firstAccordion.querySelector('.icon-toggle');
-                if(icon) icon.style.transform = 'rotate(180deg)';
-            } else {
-                // Если ни один не открыт по умолчанию, откроем первый
-                const defaultFirst = document.querySelector('.accordion-header');
-                if(defaultFirst) {
-                    defaultFirst.click(); // Имитация клика для открытия
-                }
-            }
 
             // --- 2. Логика переключения контента ---
             const menuButtons = document.querySelectorAll('.menu-button');
@@ -746,6 +1059,59 @@
                         contentArea.querySelector('.content-section.active').scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
+            });
+            
+            // --- 3. Логика Темной Темы ---
+            const toggleButton = document.getElementById('theme-toggle');
+            const body = document.body;
+            const toggleIcon = toggleButton.querySelector('.material-symbols-rounded');
+
+            // 1. Проверяем локальное хранилище при загрузке
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                enableDarkMode(false);
+            } else {
+                updateToggleButton(false);
+            }
+
+            // 2. Функция для включения темной темы
+            function enableDarkMode(save = true) {
+                body.classList.add('dark-mode');
+                updateToggleButton(true);
+                if (save) {
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+
+            // 3. Функция для отключения темной темы
+            function disableDarkMode(save = true) {
+                body.classList.remove('dark-mode');
+                updateToggleButton(false);
+                if (save) {
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // 4. Функция для обновления текста и иконки кнопки
+            function updateToggleButton(isDark) {
+                if (isDark) {
+                    toggleIcon.textContent = 'light_mode';
+                    toggleButton.setAttribute('aria-label', 'Переключить на светлую тему');
+                    toggleButton.title = 'Переключить на светлую тему';
+                } else {
+                    toggleIcon.textContent = 'dark_mode';
+                    toggleButton.setAttribute('aria-label', 'Переключить на темную тему');
+                    toggleButton.title = 'Переключить на темную тему';
+                }
+            }
+
+            // 5. Обработчик нажатия на кнопку
+            toggleButton.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    disableDarkMode();
+                } else {
+                    enableDarkMode();
+                }
             });
         });
     </script>
